@@ -1,0 +1,961 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource-variable/jetbrains-mono';
+
+const navLinks = [
+  { href: '#why', label: 'Why spacing' },
+  { href: '#compare', label: 'Compare' },
+  { href: '#play', label: 'Play' },
+  { href: '#features', label: 'Features' },
+  { href: '#how', label: 'How it works' },
+  { href: '#faq', label: 'FAQ' }
+];
+
+const footerLinks = [
+  { href: '#features', label: 'Features' },
+  { href: '#faq', label: 'FAQ' },
+  { href: '#top', label: 'Privacy' },
+  { href: '#top', label: 'Terms' }
+];
+
+const heroHighlights = ['Any font, any size', 'Syncs local text styles', 'WCAG 1.4.12 spacing check'];
+
+const tickerItems = [
+  { label: 'Tracking', style: 'font-size: 26px; font-weight: 650; letter-spacing: -0.03em; color: #5E6456' },
+  { label: 'Leading', style: 'font-size: 26px; font-weight: 300; color: #5E6456' },
+  { label: 'BASELINE GRID', style: "font-family: 'JetBrains Mono', monospace; font-size: 18px; letter-spacing: 0.1em; color: #5E6456" },
+  { label: 'Measure', style: 'font-size: 26px; font-weight: 400; letter-spacing: 0.04em; color: #5E6456' },
+  { label: 'Vertical rhythm', style: 'font-size: 26px; font-weight: 500; color: #5E6456' },
+  { label: 'Readability', style: 'font-size: 26px; font-weight: 650; letter-spacing: -0.03em; color: #5E6456' },
+  { label: 'HIERARCHY', style: "font-family: 'JetBrains Mono', monospace; font-size: 18px; letter-spacing: 0.1em; color: #5E6456" }
+];
+
+const wcagStats = [
+  { value: '1.5×', label: 'Line height', delay: 300 },
+  { value: '2×', label: 'Paragraph spacing', delay: 400 },
+  { value: '0.12×', label: 'Letter spacing', delay: 500 },
+  { value: '0.16×', label: 'Word spacing', delay: 600 }
+];
+
+const compareSpecs = [
+  { label: 'HEADING', from: '48 / Auto · 0%', to: '48 / 52 · −3%', delay: 0 },
+  { label: 'BODY', from: '18 / Auto · 0%', to: '18 / 30 · +0.3%', delay: 100 },
+  { label: 'MEASURE', from: '~ 85 ch', to: '~ 68 ch', delay: 200 }
+];
+
+const faqs = [
+  {
+    question: 'Does TypeHarmony work with any font?',
+    answer:
+      "Yes. It reads each typeface's own proportions — x-height, cap height and width — so variable fonts, custom brand fonts and Google Fonts all get values that suit them.",
+    delay: 0
+  },
+  {
+    question: 'Will it change my design without asking?',
+    answer: 'Never. Every adjustment is previewed live on the canvas first, and once applied it becomes a single history step you can undo with ⌘Z.',
+    delay: 70
+  },
+  {
+    question: 'Can it update text styles, not just layers?',
+    answer: 'Yes. Harmonize selected layers, local text styles or both — every instance linked to those styles updates across the file.',
+    delay: 140
+  },
+  {
+    question: 'How does the accessibility check work?',
+    answer: 'TypeHarmony compares your spacing with WCAG 2.2 criterion 1.4.12 and flags layers that fall short, with a suggested fix next to each one.',
+    delay: 210
+  },
+  {
+    question: 'Can I create presets for my brand?',
+    answer:
+      'Save your own rules for tracking, line-height and grid, then share them with your team so every file speaks in the same typographic voice.',
+    delay: 280
+  },
+  {
+    question: 'What about layers with mixed styles?',
+    answer: 'Mixed text is handled range by range, so a bold lead-in, inline links and body copy inside one layer each receive the right values.',
+    delay: 350
+  }
+];
+
+const presets = [
+  { label: 'Readable', style: 'padding: 8px 14px; border-radius: 999px; background: #C8F53C' },
+  { label: 'Editorial', style: 'padding: 8px 14px; border-radius: 999px; border: 1px solid #D3D6CA' },
+  { label: 'Compact', style: 'padding: 8px 14px; border-radius: 999px; border: 1px solid #D3D6CA' },
+  { label: 'Interface', style: 'padding: 8px 14px; border-radius: 999px; border: 1px solid #D3D6CA' },
+  { label: '+ Your brand', style: 'padding: 8px 14px; border-radius: 999px; border: 1px dashed #9CA290; color: #555B4C' }
+];
+
+const bulkLayers = [
+  {
+    label: 'Layer',
+    style:
+      'width: 40%; height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 999px; background: rgba(10,11,9,0.12); display: flex; align-items: center'
+  },
+  {
+    label: 'Frame',
+    style:
+      'width: 58%; height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 999px; background: rgba(10,11,9,0.2); display: flex; align-items: center'
+  },
+  {
+    label: 'Page',
+    style:
+      'width: 76%; height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 999px; background: rgba(10,11,9,0.32); display: flex; align-items: center'
+  },
+  {
+    label: 'Whole file',
+    style:
+      'width: 100%; height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 999px; background: #0A0B09; color: #C8F53C; display: flex; align-items: center; justify-content: space-between',
+    check: true
+  }
+];
+
+const bandRows = [
+  { height: 32, width: '62%', barHeight: 14, background: '#F1F3EA', delay: '' },
+  { height: 24, width: '94%', barHeight: 8, background: '#80877A', delay: '.4s' },
+  { height: 24, width: '88%', barHeight: 8, background: '#80877A', delay: '.8s' },
+  { height: 24, width: '91%', barHeight: 8, background: '#80877A', delay: '1.2s' },
+  { height: 24, width: '56%', barHeight: 8, background: '#80877A', delay: '1.6s' }
+];
+
+const auditRows = [
+  { label: 'Line 1.5×', status: '✓ pass', pass: true, last: false },
+  { label: 'Paragraph 2×', status: '✓ pass', pass: true, last: false },
+  { label: 'Letter 0.12×', status: '✓ pass', pass: true, last: false },
+  { label: 'Word 0.16×', status: '1 fix', pass: false, last: true }
+];
+---
+
+<div id="top" style="width: 100%; min-width: 1440px; height: 10300px; background: #0A0B09; color: #F1F3EA; font-family: 'Geist', sans-serif; overflow: clip; --accent: #C8F53C; --a08: rgba(200,245,60,0.08); --a16: rgba(200,245,60,0.16); --a35: rgba(200,245,60,0.4)">
+
+<div class="ld-down" style="position: sticky; top: 20px; z-index: 50; height: 64px; margin: 20px max(120px, calc((100% - 1200px) / 2)) -84px">
+<div class="nav-pill" style="height: 64px; box-sizing: border-box; padding: 0 10px 0 20px; display: flex; align-items: center; justify-content: space-between; border-radius: 999px; background: rgba(14,15,12,0.72); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 40px -24px rgba(0,0,0,0.6)">
+<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #F1F3EA">
+<span style="width: 32px; height: 32px; border-radius: 9px; background: #C8F53C; display: flex; align-items: center; justify-content: center; color: #0A0B09; font-family: 'Geist', sans-serif; font-weight: 700; letter-spacing: -0.04em; font-size: 14px">Aa</span>
+<span style="font-size: 18px; font-weight: 700; letter-spacing: -0.03em">TypeHarmony</span>
+</a>
+<nav aria-label="Primary" style="display: flex; gap: 32px; align-items: center">
+{navLinks.map((link) => (
+  <a href={link.href} class="nl" style="color: #A2A898; text-decoration: none; font-size: 14px">{link.label}</a>
+))}
+</nav>
+<a href="#install" class="btn" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; box-sizing: border-box; border-radius: 999px; background: #C8F53C; color: #0A0B09; font-size: 14px; font-weight: 600; text-decoration: none">Install plugin<svg class="arr" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+</div>
+</div>
+
+<section style="position: relative; height: 1150px; box-sizing: border-box; padding: 180px max(120px, calc((100% - 1200px) / 2)) 0; overflow: hidden; background-image: repeating-linear-gradient(to bottom, transparent 0 39px, rgba(255,255,255,0.025) 39px 40px)">
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 64px; align-items: end">
+<div style="display: flex; flex-direction: column">
+<div class="ld" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; padding: 5px 14px 5px 5px; border: 1px solid #272B22; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A2A898; animation-delay: 100ms">
+<span style="padding: 3px 9px; border-radius: 999px; background: #C8F53C; color: #0A0B09; font-weight: 500">NEW</span>Figma plugin · letter-spacing &amp; line-height</div>
+<h1 style="margin: 28px 0 0; font-size: 136px; line-height: 0.92; letter-spacing: -0.05em; font-weight: 700; color: #F1F3EA">
+<span class="mask"><span class="mask-in" style="animation-delay: 150ms">Type that</span></span>
+<span class="mask"><span class="mask-in" style="animation-delay: 280ms"><span class="breathes" style="letter-spacing: -0.05em; color: #C8F53C">breathes.</span></span></span>
+</h1>
+<div class="ld" style="display: flex; gap: 12px; align-items: center; margin-top: 40px; animation-delay: 620ms">
+<a href="#install" class="btn" style="display: inline-flex; align-items: center; gap: 10px; height: 56px; padding: 0 28px; box-sizing: border-box; border-radius: 999px; background: #C8F53C; color: #0A0B09; font-weight: 600; font-size: 17px; text-decoration: none">Install in Figma<svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+<a href="#play" class="btn btn-ghost" style="display: inline-flex; align-items: center; height: 56px; padding: 0 28px; box-sizing: border-box; border-radius: 999px; border: 1px solid #33382D; color: #F1F3EA; font-weight: 500; font-size: 17px; text-decoration: none">Try the spacing game</a>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 28px; padding-bottom: 8px">
+<p class="ld" style="margin: 0; font-size: 18px; line-height: 1.6; color: #A2A898; animation-delay: 480ms">TypeHarmony tunes letter-spacing and line-height across your Figma files in one click — so every headline, paragraph and label is balanced, readable and ready to ship.</p>
+<div class="ld" style="display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: #C9CEBF; animation-delay: 760ms; border-top: 1px solid #22261E; padding-top: 20px">
+{heroHighlights.map((highlight) => (
+  <span style="display: flex; align-items: center; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C8F53C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>{highlight}</span>
+))}
+</div>
+</div>
+</div>
+
+<div class="ld-card" style="margin-top: 64px; height: 400px; display: grid; grid-template-columns: minmax(0, 1fr) 340px; border-radius: 24px; border: 1px solid #272B22; background: #121410; overflow: hidden; box-shadow: 0 60px 120px -60px rgba(200,245,60,0.18)">
+<div style="position: relative; box-sizing: border-box; padding: 36px 48px; background-image: radial-gradient(circle, #23271F 1px, transparent 1.4px); background-size: 20px 20px">
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #80877A; margin-bottom: 24px"><span>Frame · Article / 1440</span><span>100%</span></div>
+<div style="width: 520px; display: flex; flex-direction: column; align-items: center; gap: 8px">
+<div style="position: relative; width: 520px; box-sizing: border-box; padding: 18px 20px; border: 1px solid #C8F53C">
+<span style="position: absolute; top: -5px; left: -5px; width: 8px; height: 8px; background: #F1F3EA; border: 1px solid #C8F53C"></span>
+<span style="position: absolute; top: -5px; right: -5px; width: 8px; height: 8px; background: #F1F3EA; border: 1px solid #C8F53C"></span>
+<span style="position: absolute; bottom: -5px; left: -5px; width: 8px; height: 8px; background: #F1F3EA; border: 1px solid #C8F53C"></span>
+<span style="position: absolute; bottom: -5px; right: -5px; width: 8px; height: 8px; background: #F1F3EA; border: 1px solid #C8F53C"></span>
+<div class="hc-h" style="margin: 0 0 16px; font-size: 40px; line-height: 46px; letter-spacing: -0.025em; font-weight: 650; color: #F1F3EA">The quiet power of well-set type</div>
+<div class="hc-p" style="font-size: 17px; line-height: 28px; color: #C9CEBF">Good spacing guides the eye without asking for attention. Every line lands where the reader expects it.</div>
+<div style="position: absolute; left: 100%; top: 34px; display: flex; align-items: center"><span style="width: 18px; height: 1px; background: #C8F53C"></span><span style="padding: 5px 10px; border-radius: 6px; background: rgba(200,245,60,0.16); color: #C8F53C; font-family: 'JetBrains Mono', monospace; font-size: 12px; display: flex; gap: 8px; white-space: nowrap"><span style="color: #80877A">tracking</span><span class="sw"><span class="sw-a">0%</span><span class="sw-b">−2.5%</span></span></span></div>
+<div style="position: absolute; left: 100%; top: 142px; display: flex; align-items: center"><span style="width: 18px; height: 1px; background: #C8F53C"></span><span style="padding: 5px 10px; border-radius: 6px; background: rgba(200,245,60,0.16); color: #C8F53C; font-family: 'JetBrains Mono', monospace; font-size: 12px; display: flex; gap: 8px; white-space: nowrap"><span style="color: #80877A">leading</span><span class="sw"><span class="sw-a">18 px</span><span class="sw-b">28 px</span></span></span></div>
+</div>
+<span style="padding: 3px 8px; border-radius: 4px; background: #C8F53C; color: #0A0B09; font-family: 'JetBrains Mono', monospace; font-size: 11px">520 × Hug</span>
+</div>
+<div class="cursor" aria-hidden="true" style="position: absolute; left: 610px; top: 300px; display: flex; align-items: flex-start; gap: 4px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="#C8F53C" stroke="#0A0B09" stroke-width="1.5" stroke-linejoin="round"><path d="M4 3l7 17 2.5-7L21 10.5z"></path></svg>
+<span style="margin-top: 14px; padding: 3px 8px; border-radius: 6px; background: #C8F53C; color: #0A0B09; font-size: 11px; font-weight: 600">You</span>
+</div>
+</div>
+<div style="box-sizing: border-box; padding: 28px; border-left: 1px solid #22261E; background: #0F110D; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700"><span style="width: 22px; height: 22px; border-radius: 6px; background: #C8F53C; color: #0A0B09; display: flex; align-items: center; justify-content: center; font-weight: 700; letter-spacing: -0.04em; font-size: 10px">Aa</span>TypeHarmony</span>
+<span style="padding: 3px 10px; border-radius: 999px; border: 1px solid #33382D; font-size: 11px; color: #A2A898">Readable</span>
+</div>
+<div style="display: flex; justify-content: space-between; height: 40px; align-items: center; font-size: 14px; border-bottom: 1px solid #1A1D17"><span style="color: #A2A898">Letter-spacing</span><span class="sw" style="font-family: 'JetBrains Mono', monospace; font-size: 13px"><span class="sw-a">0%</span><span class="sw-b">−2.5%</span></span></div>
+<div style="display: flex; justify-content: space-between; height: 40px; align-items: center; font-size: 14px; border-bottom: 1px solid #1A1D17"><span style="color: #A2A898">Line height</span><span class="sw" style="font-family: 'JetBrains Mono', monospace; font-size: 13px"><span class="sw-a">Auto</span><span class="sw-b">28 px</span></span></div>
+<div style="display: flex; justify-content: space-between; height: 40px; align-items: center; font-size: 14px; border-bottom: 1px solid #1A1D17"><span style="color: #A2A898">Baseline grid</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">4 pt</span></div>
+<div style="display: flex; justify-content: space-between; height: 40px; align-items: center; font-size: 14px"><span style="color: #A2A898">Accessibility</span><span class="sw" style="font-family: 'JetBrains Mono', monospace; font-size: 13px"><span class="sw-a" style="color: #A2A898">Review</span><span class="sw-b" style="display: flex; align-items: center; gap: 6px; color: #C8F53C"><span style="width: 6px; height: 6px; border-radius: 50%; background: #C8F53C"></span>Pass</span></span></div>
+<button type="button" class="hc-btn" style="margin-top: auto; height: 46px; border: 0; border-radius: 12px; background: #C8F53C; color: #0A0B09; box-shadow: inset 0 0 0 1px #C8F53C; font-family: 'Geist', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer"><span class="sw" style="justify-items: center"><span class="sw-a">Harmonize</span><span class="sw-b" style="display: flex; align-items: center; gap: 8px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Harmonized</span></span></button>
+</div>
+</div>
+
+<div class="ticker ld" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 72px; border-top: 1px solid #1E211B; overflow: hidden; animation-delay: 900ms">
+<div class="ticker-track" style="display: flex; width: max-content; height: 72px; align-items: center; gap: 48px; padding-left: 48px; white-space: nowrap">
+{[...tickerItems, ...tickerItems].map((item) => (
+  <>
+    <span style={item.style}>{item.label}</span><span style="width: 6px; height: 6px; border-radius: 50%; background: #C8F53C"></span>
+  </>
+))}
+</div>
+</div>
+</section>
+
+<section id="why" style="height: 2260px; box-sizing: border-box; padding: 140px max(120px, calc((100% - 1200px) / 2)) 0; background: #F3F4EE; color: #0E0F0C">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center">
+<div class="rv-t" style="display: inline-flex; align-items: center; gap: 10px; padding: 5px 14px 5px 5px; border: 1px solid #D3D6CA; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #3F4535"><span style="padding: 3px 9px; border-radius: 999px; background: #0A0B09; color: #C8F53C; font-weight: 500">01</span>THE INVISIBLE CRAFT</div>
+<h2 class="rv-t" style="--d: 80ms; margin: 28px 0 0; font-size: 64px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 650">Readers never notice good spacing.<br /><span class="mark" style="padding: 0 8px; background-image: linear-gradient(transparent 56%, #C8F53C 56%, #C8F53C 92%, transparent 92%)">They always feel bad spacing.</span></h2>
+<p class="rv-t" style="--d: 180ms; margin: 28px 0 0; max-width: 640px; font-size: 20px; line-height: 1.6; color: #555B4C">Letter-spacing and line-height decide how fast the eye moves, where it rests and how easily it finds the next line. Get them wrong, and even a beautiful typeface feels cramped, noisy or tiring.</p>
+</div>
+
+<div style="margin-top: 96px; display: flex; flex-direction: column; gap: 32px">
+<div style="height: 380px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 72px; align-items: center">
+<div class="rv-l" style="height: 380px; box-sizing: border-box; padding: 40px; background: #0A0B09; color: #F1F3EA; border-radius: 28px; display: flex; flex-direction: column; justify-content: center; gap: 8px">
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: #80877A; margin-bottom: 12px"><span>LETTER-SPACING · 64 PX</span><span>Display</span></div>
+<div style="height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 16px"><span style="font-size: 64px; font-weight: 650; letter-spacing: -0.1em; color: #5E6456">Spacing</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #80877A">−10% · collides</span></div>
+<div style="height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; border-radius: 14px; background: rgba(200,245,60,0.08); border: 1px solid rgba(200,245,60,0.16)"><span class="track-loop" style="font-size: 64px; font-weight: 650; letter-spacing: -0.02em; color: #F1F3EA">Spacing</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #C8F53C">−2% ✓</span></div>
+<div style="height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 16px"><span style="font-size: 64px; font-weight: 650; letter-spacing: 0.18em; color: #5E6456">Spacing</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #80877A">+18% · falls apart</span></div>
+</div>
+<div>
+<div class="rv-t outline-num" style="font-size: 96px; line-height: 0.8; font-weight: 700; letter-spacing: -0.05em">01</div>
+<div class="rv-t" style="--d: 100ms; margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #4A6400">TRACKING · LETTER-SPACING</div>
+<h3 class="rv-t" style="--d: 160ms; margin: 14px 0 0; font-size: 40px; line-height: 1.1; letter-spacing: -0.035em; font-weight: 650">Air between letters</h3>
+<p class="rv-t" style="--d: 220ms; margin: 16px 0 0; max-width: 500px; font-size: 17px; line-height: 1.65; color: #555B4C">Tracking sets the space between every character. Display sizes want it tighter, small labels want it looser — one value never fits every size.</p>
+<div class="rv-t" style="--d: 280ms; margin-top: 22px; display: flex; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px"><span style="padding: 7px 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DCDFD3">Display −1…−3%</span><span style="padding: 7px 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DCDFD3">Labels +5…+12%</span></div>
+</div>
+</div>
+<div style="height: 380px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 72px; align-items: center">
+<div style="padding-left: 40px">
+<div class="rv-t outline-num" style="font-size: 96px; line-height: 0.8; font-weight: 700; letter-spacing: -0.05em">02</div>
+<div class="rv-t" style="--d: 100ms; margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #4A6400">LEADING · LINE-HEIGHT</div>
+<h3 class="rv-t" style="--d: 160ms; margin: 14px 0 0; font-size: 40px; line-height: 1.1; letter-spacing: -0.035em; font-weight: 650">Room between lines</h3>
+<p class="rv-t" style="--d: 220ms; margin: 16px 0 0; max-width: 500px; font-size: 17px; line-height: 1.65; color: #555B4C">Too little and lines collide; too much and the eye loses its way back to the next line. Body text reads best between 1.4× and 1.6× its size.</p>
+<div class="rv-t" style="--d: 280ms; margin-top: 22px; display: flex; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px"><span style="padding: 7px 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DCDFD3">Body 1.4–1.6×</span><span style="padding: 7px 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DCDFD3">Headlines 1.0–1.2×</span></div>
+</div>
+<div class="rv-r" style="height: 380px; box-sizing: border-box; padding: 40px; background: #0A0B09; color: #F1F3EA; border-radius: 28px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: center">
+<div>
+<div style="font-size: 44px; font-weight: 650; letter-spacing: -0.04em; color: #5E6456">1.0×</div>
+<div style="margin: 8px 0 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #80877A">CRAMPED</div>
+<div style="font-size: 14px; line-height: 14px; color: #A2A898">When lines sit too close, the eye loses its path and the paragraph turns into a dense grey block that is hard to follow from one line to the next.</div>
+</div>
+<div style="padding-left: 32px; border-left: 1px solid #22261E">
+<div style="font-size: 44px; font-weight: 650; letter-spacing: -0.04em; color: #C8F53C">1.5×</div>
+<div style="margin: 8px 0 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #C8F53C">COMFORTABLE ✓</div>
+<div class="lead-loop" style="font-size: 14px; line-height: 21px; color: #F1F3EA">With room to breathe, each line is easy to follow and the return sweep to the next line feels completely effortless.</div>
+</div>
+</div>
+</div>
+<div style="height: 380px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 72px; align-items: center">
+<div class="rv-l" style="position: relative; height: 380px; box-sizing: border-box; padding: 40px; background-color: #0A0B09; background-image: repeating-linear-gradient(to bottom, transparent 0 7px, rgba(255,255,255,0.07) 7px 8px); color: #F1F3EA; border-radius: 28px; overflow: hidden">
+<span class="scan" style="position: absolute; left: 0; right: 0; top: 40px; height: 1px; background: #C8F53C; box-shadow: 0 0 14px rgba(200,245,60,0.4)"></span>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 24px; letter-spacing: 0.06em; color: #80877A">BASELINE GRID · 8 PT</div>
+<div style="margin-top: 16px; font-size: 32px; line-height: 40px; letter-spacing: -0.03em; font-weight: 650">Rhythm, not rules</div>
+<div style="margin-top: 16px; max-width: 420px; font-size: 16px; line-height: 24px; color: #C9CEBF">Every line height is a multiple of 8, so headings, paragraphs and cards sit on one shared beat. Columns line up, spacing stays predictable, and the page feels calm from top to bottom.</div>
+<span style="position: absolute; right: 24px; bottom: 24px; padding: 4px 10px; border-radius: 6px; background: rgba(200,245,60,0.16); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #C8F53C">24 / 40 / 8</span>
+</div>
+<div>
+<div class="rv-t outline-num" style="font-size: 96px; line-height: 0.8; font-weight: 700; letter-spacing: -0.05em">03</div>
+<div class="rv-t" style="--d: 100ms; margin-top: 24px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #4A6400">RHYTHM · BASELINE GRID</div>
+<h3 class="rv-t" style="--d: 160ms; margin: 14px 0 0; font-size: 40px; line-height: 1.1; letter-spacing: -0.035em; font-weight: 650">A steady vertical beat</h3>
+<p class="rv-t" style="--d: 220ms; margin: 16px 0 0; max-width: 500px; font-size: 17px; line-height: 1.65; color: #555B4C">When line-heights snap to a shared 4 or 8 pt grid, text, cards and components align — and the whole page feels calm and intentional.</p>
+<div class="rv-t" style="--d: 280ms; margin-top: 22px; display: flex; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px"><span style="padding: 7px 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DCDFD3">4 pt grid</span><span style="padding: 7px 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #DCDFD3">8 pt grid</span></div>
+</div>
+</div>
+</div>
+
+<div class="rv-s" style="margin-top: 96px; height: 260px; box-sizing: border-box; padding: 48px; background: #0A0B09; color: #F1F3EA; border-radius: 28px; display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 56px; align-items: center">
+<div>
+<div class="rv-t" style="--d: 150ms; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #C8F53C">ACCESSIBILITY · WCAG 2.2 · 1.4.12</div>
+<h3 class="rv-t" style="--d: 230ms; margin: 12px 0 0; font-size: 30px; line-height: 1.15; letter-spacing: -0.03em; font-weight: 650">Spacing is an accessibility requirement</h3>
+<p class="rv-t" style="--d: 310ms; margin: 12px 0 0; font-size: 15px; line-height: 1.6; color: #A2A898">Content must stay readable when people raise spacing to these values. TypeHarmony checks every layer before hand-off.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr))">
+{wcagStats.map((stat) => (
+  <div class="rv-t" style={`--d: ${stat.delay}ms; padding-left: 24px; border-left: 1px solid #2A2E24`}><div style="font-size: 60px; line-height: 1; font-weight: 650; letter-spacing: -0.05em; color: #C8F53C">{stat.value}</div><div style="margin-top: 14px; font-size: 15px; font-weight: 600">{stat.label}</div><div style="margin-top: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #80877A">of font size</div></div>
+))}
+</div>
+</div>
+</section>
+
+<section id="compare" style="height: 1180px; box-sizing: border-box; padding: 140px max(120px, calc((100% - 1200px) / 2)) 0">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px">
+<div style="width: 800px">
+<div class="rv-t" style="display: inline-flex; align-items: center; gap: 10px; padding: 5px 14px 5px 5px; border: 1px solid #2A2E24; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #A2A898"><span style="padding: 3px 9px; border-radius: 999px; background: #C8F53C; color: #0A0B09; font-weight: 500">02</span>BEFORE &amp; AFTER</div>
+<h2 class="rv-t" style="--d: 80ms; margin: 28px 0 0; font-size: 56px; line-height: 1.06; letter-spacing: -0.04em; font-weight: 650">Same font. Same words.<br /><span style="color: #C8F53C">A completely different read.</span></h2>
+</div>
+<p class="rv-t" style="--d: 200ms; margin: 0; width: 360px; font-size: 17px; line-height: 1.6; color: #A2A898">Drag the handle across the article. The only thing that changes is spacing — tracking and line-height tuned by TypeHarmony.</p>
+</div>
+
+<div class="rv-s" style="--d: 120ms; position: relative; margin-top: 56px; height: 560px; border-radius: 28px; overflow: hidden; border: 1px solid #22261E; user-select: none">
+<div style="position: absolute; inset: 0; background: #E4E6DC; color: #0E0F0C; display: flex; align-items: center; justify-content: center">
+<span style="position: absolute; top: 24px; left: 24px; display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: #0A0B09; color: #F1F3EA; font-family: 'JetBrains Mono', monospace; font-size: 12px">BEFORE <span style="color: #80877A">· Figma defaults</span></span>
+<div style="width: 760px">
+<div style="font-size: 12px; font-weight: 600; color: #5B6152; text-transform: uppercase">Essay · 6 min read</div>
+<div style="margin-top: 12px; font-size: 48px; line-height: 1.2; font-weight: 650; letter-spacing: 0">Designing for the long read</div>
+<div style="margin-top: 16px; font-size: 18px; line-height: 1.21; color: #2E3228">Good typography is mostly invisible. When the space between letters and lines is right, readers stop noticing the page and start following the story. The eye glides along each line, returns easily to the next one, and settles into a comfortable pace that can last for pages.</div>
+</div>
+</div>
+<div style="position: absolute; inset: 0; background: #F7F8F2; color: #0E0F0C; display: flex; align-items: center; justify-content: center; clip-path: inset(0 0 0 50%)" id="cmp-after">
+<span style="position: absolute; top: 24px; right: 24px; display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; background: #C8F53C; color: #0A0B09; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500">AFTER · TypeHarmony</span>
+<div style="width: 760px">
+<div style="font-size: 11px; line-height: 16px; font-weight: 600; letter-spacing: 0.12em; color: #5B6152; text-transform: uppercase">Essay · 6 min read</div>
+<div style="margin-top: 16px; font-size: 48px; line-height: 52px; font-weight: 650; letter-spacing: -0.03em">Designing for the long read</div>
+<div style="margin-top: 20px; max-width: 620px; font-size: 18px; line-height: 30px; letter-spacing: 0.003em; color: #2E3228">Good typography is mostly invisible. When the space between letters and lines is right, readers stop noticing the page and start following the story. The eye glides along each line, returns easily to the next one, and settles into a comfortable pace that can last for pages.</div>
+</div>
+</div>
+<div aria-hidden="true" style="position: absolute; top: 0; bottom: 0; left: 50%; width: 0; pointer-events: none" id="cmp-handle">
+<span style="position: absolute; top: 0; bottom: 0; left: -1px; width: 2px; background: #C8F53C; box-shadow: 0 0 20px rgba(200,245,60,0.4)"></span>
+<span style="position: absolute; top: 50%; left: -28px; margin-top: -28px; width: 56px; height: 56px; box-sizing: border-box; border-radius: 50%; background: #0A0B09; border: 2px solid #C8F53C; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 30px rgba(0,0,0,0.35)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8F53C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6"></path><path d="M15 6l6 6-6 6"></path></svg></span>
+</div>
+<span aria-hidden="true" style="position: absolute; bottom: 20px; left: 50%; margin-left: -96px; width: 192px; text-align: center; padding: 7px 0; border-radius: 999px; background: rgba(10,11,9,0.85); color: #F1F3EA; font-family: 'JetBrains Mono', monospace; font-size: 12px; pointer-events: none">← drag to compare →</span>
+<input class="cmp-range" type="range" min="2" max="98" step="0.5" value="50" id="cmp-range" aria-label="Drag to compare the article before and after TypeHarmony" style="position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize" />
+</div>
+
+<div style="margin-top: 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+{compareSpecs.map((spec) => (
+  <div class="rv-t" style={`--d: ${spec.delay}ms; padding-top: 18px; border-top: 1px solid #22261E`}><div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #80877A">{spec.label}</div><div style="margin-top: 10px; display: flex; align-items: center; gap: 12px; font-family: 'JetBrains Mono', monospace; font-size: 15px"><span style="color: #80877A">{spec.from}</span><span style="color: #5E6456">→</span><span style="color: #C8F53C">{spec.to}</span></div></div>
+))}
+</div>
+</section>
+
+<section id="play" style="height: 1060px; box-sizing: border-box; padding: 120px max(120px, calc((100% - 1200px) / 2)) 0; background: #C8F53C; color: #0A0B09">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px">
+<div style="width: 760px">
+<div class="rv-t" style="display: inline-flex; align-items: center; gap: 10px; padding: 5px 14px 5px 5px; border: 1px solid rgba(10,11,9,0.25); border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #1F2610"><span style="padding: 3px 9px; border-radius: 999px; background: #0A0B09; color: #C8F53C; font-weight: 500">03</span>PLAY</div>
+<h2 class="rv-t" style="--d: 80ms; margin: 28px 0 0; font-size: 56px; line-height: 1.06; letter-spacing: -0.04em; font-weight: 650">Can you out-set<br />a typographer?</h2>
+</div>
+<p class="rv-t" style="--d: 200ms; margin: 0; width: 380px; font-size: 17px; line-height: 1.6; color: #2A3310">Drag the sliders until the text feels right. The harmony meter shows how close you are — or let TypeHarmony finish the job in one click.</p>
+</div>
+
+<div class="rv-s" style="--d: 150ms; margin-top: 56px; height: 580px; box-sizing: border-box; padding: 16px; background: #0A0B09; border-radius: 28px; display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 16px; box-shadow: 0 40px 80px -40px rgba(10,11,9,0.6)">
+<div style="position: relative; box-sizing: border-box; padding: 36px 40px; background: #F3F4EE; border-radius: 18px; display: flex; flex-direction: column; color: #0E0F0C; overflow: hidden">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #5B6152" id="g-kicker"></span>
+<div style="display: flex; gap: 6px" aria-label="Round progress">
+{Array.from({ length: 3 }).map(() => (
+  <span class="g-dot" style="width: 28px; height: 6px; border-radius: 3px; background: #D0D3C6"></span>
+))}
+</div>
+</div>
+<div style="flex-grow: 1; display: flex; align-items: center">
+<div id="g-text" class="gtxt" style="white-space: pre-line; color: #0E0F0C; background-image: linear-gradient(to bottom, transparent calc(100% - 1px), rgba(74,100,0,0.35) calc(100% - 1px));"></div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 36px">
+<span style="font-size: 14px; line-height: 1.5; color: #555B4C">Hint: <span id="g-hint"></span></span>
+<span id="g-win" class="win" hidden style="flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #0A0B09; color: #C8F53C; font-size: 14px; font-weight: 600"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Perfectly set</span>
+</div>
+</div>
+
+<div style="box-sizing: border-box; padding: 24px 12px 12px; display: flex; flex-direction: column; gap: 20px; color: #F1F3EA">
+<div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #80877A">HARMONY SCORE</div>
+<div style="display: flex; align-items: baseline; gap: 8px; margin-top: 6px"><span aria-live="polite" style="font-size: 88px; line-height: 0.9; font-weight: 700; letter-spacing: -0.05em; color: #F1F3EA" id="g-score">0</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #80877A">/ 100</span></div>
+<div style="margin-top: 16px; height: 8px; border-radius: 4px; background: #22261E; overflow: hidden"><div class="gfill" id="g-fill" style="height: 8px; border-radius: 4px; width: 0%; background: #C8F53C"></div></div>
+<div style="margin-top: 12px; font-size: 15px; color: #A2A898" id="g-status"></div>
+</div>
+<div>
+<div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px"><label for="g-ls">Letter-spacing</label><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #C8F53C" id="g-lsl"></span></div>
+<input id="g-ls" type="range" min="-10" max="15" step="0.5" value="8" style="width: 100%; margin: 10px 0 0; accent-color: #C8F53C; cursor: pointer" />
+</div>
+<div>
+<div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px"><label for="g-lh">Line height</label><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #C8F53C" id="g-lhl"></span></div>
+<input id="g-lh" type="range" min="80" max="200" step="5" value="150" style="width: 100%; margin: 10px 0 0; accent-color: #C8F53C; cursor: pointer" />
+</div>
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px">
+<button type="button" class="btn" id="g-auto" style="position: relative; overflow: hidden; height: 48px; border: 0; border-radius: 12px; background: #C8F53C; color: #0A0B09; font-family: 'Geist', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer"><span class="sheen"></span>Auto-harmonize</button>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<button type="button" class="btn btn-ghost" id="g-reset" style="height: 48px; border: 1px solid #33382D; border-radius: 12px; background: transparent; color: #F1F3EA; font-family: 'Geist', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer">Reset</button>
+<button type="button" class="btn" id="g-next" disabled style="height: 48px; border-radius: 12px; font-family: 'Geist', sans-serif; font-size: 15px; font-weight: 600;">Next round</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="features" style="height: 1480px; box-sizing: border-box; padding: 140px max(120px, calc((100% - 1200px) / 2)) 0; background: #F3F4EE; color: #0E0F0C">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px">
+<div style="width: 800px">
+<div class="rv-t" style="display: inline-flex; align-items: center; gap: 10px; padding: 5px 14px 5px 5px; border: 1px solid #D3D6CA; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #3F4535"><span style="padding: 3px 9px; border-radius: 999px; background: #0A0B09; color: #C8F53C; font-weight: 500">04</span>WHAT IT DOES</div>
+<h2 class="rv-t" style="--d: 80ms; margin: 28px 0 0; font-size: 56px; line-height: 1.06; letter-spacing: -0.04em; font-weight: 650">Every spacing decision,<br /><span class="mark" style="padding: 0 8px; background-image: linear-gradient(transparent 56%, #C8F53C 56%, #C8F53C 92%, transparent 92%)">handled with care.</span></h2>
+</div>
+<p class="rv-t" style="--d: 200ms; margin: 0; width: 360px; font-size: 17px; line-height: 1.6; color: #555B4C">Classic typographic rules plus each font's own metrics — applied across layers, frames and text styles.</p>
+</div>
+
+<div style="margin-top: 56px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: 300px 300px 320px; gap: 24px">
+<div class="card rv" style="grid-column: 1 / 3; grid-row: 1 / 3; box-sizing: border-box; padding: 36px; background: #0A0B09; color: #F1F3EA; border-radius: 28px; display: flex; flex-direction: column">
+<span class="rv-t" style="--d: 200ms; align-self: flex-start; padding: 6px 12px; border-radius: 999px; background: rgba(200,245,60,0.16); color: #C8F53C; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em">SIZE-AWARE TRACKING</span>
+<h3 class="rv-t" style="--d: 280ms; margin: 20px 0 0; font-size: 34px; line-height: 1.1; letter-spacing: -0.035em; font-weight: 650">Tracking that scales<br />with every size</h3>
+<p class="rv-t" style="--d: 360ms; margin: 12px 0 0; max-width: 460px; font-size: 16px; line-height: 1.6; color: #A2A898">Tighter for display headlines, more open for captions and labels — the way type designers intend it.</p>
+<svg class="rv-chart" style="margin-top: auto" viewBox="0 0 440 280" width="100%" role="img" aria-label="Recommended tracking falls from about +5% at 10 px to about −3.5% at 96 px">
+<text x="50" y="10" font-family="JetBrains Mono, monospace" font-size="10" fill="#C8F53C">RECOMMENDED TRACKING</text>
+<line x1="50" y1="20" x2="420" y2="20" stroke="#1E211B"></line>
+<line x1="50" y1="60" x2="420" y2="60" stroke="#1E211B"></line>
+<line x1="50" y1="100" x2="420" y2="100" stroke="#1E211B"></line>
+<line x1="50" y1="140" x2="420" y2="140" stroke="#3A3F33" stroke-dasharray="4 4"></line>
+<line x1="50" y1="180" x2="420" y2="180" stroke="#1E211B"></line>
+<line x1="50" y1="220" x2="420" y2="220" stroke="#1E211B"></line>
+<g font-family="JetBrains Mono, monospace" font-size="10" fill="#80877A" text-anchor="end">
+<text x="40" y="24">+6%</text><text x="40" y="64">+4%</text><text x="40" y="104">+2%</text><text x="40" y="144">0%</text><text x="40" y="184">−2%</text><text x="40" y="224">−4%</text>
+</g>
+<g font-family="JetBrains Mono, monospace" font-size="10" fill="#80877A" text-anchor="middle">
+<text x="50" y="244">10</text><text x="101" y="244">12</text><text x="153" y="244">16</text><text x="204" y="244">24</text><text x="256" y="244">32</text><text x="307" y="244">48</text><text x="359" y="244">64</text><text x="410" y="244">96</text>
+</g>
+<text x="420" y="268" font-family="JetBrains Mono, monospace" font-size="10" fill="#80877A" text-anchor="end">font size, px</text>
+<path class="draw" pathLength="1" stroke-dasharray="1" d="M50,40 C75,62 88,74 101,80 S140,124 153,130 S190,156 204,160 S245,174 256,176 S295,190 307,192 S347,201 359,202 S400,209 410,210" fill="none" stroke="#C8F53C" stroke-width="3" stroke-linecap="round"></path>
+<circle class="pulse" cx="153" cy="130" r="5" fill="none" stroke="#C8F53C" stroke-width="1.5"></circle>
+<circle class="pulse" cx="359" cy="202" r="5" fill="none" stroke="#C8F53C" stroke-width="1.5" style="animation-delay: 1.2s"></circle>
+<g fill="#0A0B09" stroke="#C8F53C" stroke-width="2">
+<circle class="pop" style="--d: 350ms" cx="50" cy="40" r="4"></circle><circle class="pop" style="--d: 550ms" cx="101" cy="80" r="4"></circle><circle class="pop" style="--d: 750ms" cx="153" cy="130" r="5"></circle><circle class="pop" style="--d: 950ms" cx="204" cy="160" r="4"></circle><circle class="pop" style="--d: 1150ms" cx="256" cy="176" r="4"></circle><circle class="pop" style="--d: 1350ms" cx="307" cy="192" r="4"></circle><circle class="pop" style="--d: 1550ms" cx="359" cy="202" r="5"></circle><circle class="pop" style="--d: 1750ms" cx="410" cy="210" r="4"></circle>
+</g>
+<text class="lbl" x="166" y="120" font-family="JetBrains Mono, monospace" font-size="11" fill="#F1F3EA">Body 16 px · +0.5%</text>
+<text class="lbl" x="359" y="184" font-family="JetBrains Mono, monospace" font-size="11" fill="#F1F3EA" text-anchor="middle">Display 64 px · −3.1%</text>
+</svg>
+</div>
+<div class="card rv" style="--d: 120ms; grid-column: 3; grid-row: 1; box-sizing: border-box; padding: 24px; background: #C8F53C; color: #0A0B09; border-radius: 28px; display: flex; flex-direction: column">
+<div class="rv-t" style="--d: 300ms; display: flex; flex-direction: column; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px">
+{bulkLayers.map((layer) => (
+  <span style={layer.style}>{layer.label}{layer.check && <span>✓</span>}</span>
+))}
+</div>
+<h3 class="rv-t" style="--d: 380ms; margin: auto 0 0; font-size: 22px; line-height: 1.2; letter-spacing: -0.025em; font-weight: 650">Harmonize in bulk</h3>
+<p class="rv-t" style="--d: 440ms; margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #2A3310">A layer, a frame, a page or the whole file — tuned in one pass, mixed fonts included.</p>
+</div>
+<div class="card card-l rv" style="--d: 240ms; grid-column: 4; grid-row: 1; box-sizing: border-box; padding: 24px; background: #FFFFFF; border: 1px solid #E1E3D9; border-radius: 28px; display: flex; flex-direction: column">
+<div class="rv-t" style="--d: 420ms; padding: 14px; border-radius: 16px; background: #F3F4EE; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); text-align: center">
+<div><div style="font-family: 'Geist', sans-serif; font-size: 40px; line-height: 1; font-weight: 600; letter-spacing: -0.03em">Ag</div><div style="margin-top: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4A6400">−1.5%</div></div>
+<div><div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; line-height: 1; font-weight: 600; letter-spacing: -0.02em">Ag</div><div style="margin-top: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4A6400">−1.0%</div></div>
+<div><div style="font-family: 'JetBrains Mono', monospace; font-size: 36px; line-height: 1.1; font-weight: 500">Ag</div><div style="margin-top: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4A6400">0%</div></div>
+</div>
+<h3 class="rv-t" style="--d: 500ms; margin: auto 0 0; font-size: 22px; line-height: 1.2; letter-spacing: -0.025em; font-weight: 650">Font-aware metrics</h3>
+<p class="rv-t" style="--d: 560ms; margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #555B4C">Each typeface gets values that suit its own x-height, width and proportions.</p>
+</div>
+<div class="card card-l rv" style="--d: 180ms; grid-column: 3 / 5; grid-row: 2; box-sizing: border-box; padding: 28px; background: #FFFFFF; border: 1px solid #E1E3D9; border-radius: 28px; display: flex; gap: 28px">
+<div style="width: 220px; flex-shrink: 0; display: flex; flex-direction: column">
+<span class="rv-t" style="--d: 360ms; align-self: flex-start; padding: 6px 12px; border-radius: 999px; background: #F3F4EE; border: 1px solid #DCDFD3; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #3F4535">4 / 8 PT GRID</span>
+<h3 class="rv-t" style="--d: 420ms; margin: auto 0 0; font-size: 24px; line-height: 1.15; letter-spacing: -0.03em; font-weight: 650">Rhythmic line-height</h3>
+<p class="rv-t" style="--d: 480ms; margin: 8px 0 0; font-size: 14px; line-height: 1.5; color: #555B4C">Line-heights round to your grid, so every block and component aligns.</p>
+</div>
+<div style="flex-grow: 1; box-sizing: border-box; padding: 20px 24px; border-radius: 18px; background-color: #0A0B09; background-image: repeating-linear-gradient(to bottom, transparent 0 7px, rgba(255,255,255,0.06) 7px 8px); display: flex; flex-direction: column; justify-content: center">
+{bandRows.map((band) => (
+  <div class="band" style={`height: ${band.height}px; display: flex; align-items: center${band.delay ? `; animation-delay: ${band.delay}` : ''}`}><span style={`width: ${band.width}; height: ${band.barHeight}px; border-radius: 4px; background: ${band.background}`}></span></div>
+))}
+<div style="margin-top: 12px; display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #C8F53C"><span>32 · 24 · 24 · 24</span><span>all ÷ 8 ✓</span></div>
+</div>
+</div>
+<div class="card rv" style="grid-column: 1; grid-row: 3; box-sizing: border-box; padding: 24px; background: #0A0B09; color: #F1F3EA; border-radius: 28px; display: flex; flex-direction: column">
+<div class="rv-t" style="--d: 200ms; padding: 8px 14px; border-radius: 14px; background: #121410; border: 1px solid #22261E; font-family: 'JetBrains Mono', monospace; font-size: 11px">
+{auditRows.map((row) => (
+  <div style={`height: 30px; display: flex; align-items: center; justify-content: space-between${row.last ? '' : '; border-bottom: 1px solid #1E211B'}`}><span style="color: #A2A898">{row.label}</span><span style={row.pass ? 'color: #C8F53C' : 'color: #F1F3EA'}>{row.status}</span></div>
+))}
+</div>
+<h3 class="rv-t" style="--d: 300ms; margin: auto 0 0; font-size: 22px; line-height: 1.2; letter-spacing: -0.025em; font-weight: 650">Accessibility check</h3>
+<p class="rv-t" style="--d: 360ms; margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #A2A898">Flags text that fails WCAG 1.4.12 and suggests a fix right next to it.</p>
+</div>
+<div class="card card-l rv" style="--d: 100ms; grid-column: 2; grid-row: 3; box-sizing: border-box; padding: 24px; background: #FFFFFF; border: 1px solid #E1E3D9; border-radius: 28px; display: flex; flex-direction: column">
+<div class="rv-t" style="--d: 300ms; padding: 8px 14px; border-radius: 14px; background: #F3F4EE; font-size: 13px">
+<div style="height: 30px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E1E3D9"><span style="font-weight: 600">Display / XL</span><span style="display: flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4A6400"><svg class="spin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4A6400" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"></path><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"></path></svg>sync</span></div>
+<div style="height: 30px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E1E3D9"><span style="font-weight: 600">Heading / M</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4A6400">✓ synced</span></div>
+<div style="height: 30px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E1E3D9"><span>Body / Regular</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4A6400">✓ synced</span></div>
+<div style="height: 30px; display: flex; align-items: center; justify-content: space-between"><span style="font-size: 12px">Caption / S</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4A6400">✓ synced</span></div>
+</div>
+<h3 class="rv-t" style="--d: 400ms; margin: auto 0 0; font-size: 22px; line-height: 1.2; letter-spacing: -0.025em; font-weight: 650">Text styles sync</h3>
+<p class="rv-t" style="--d: 460ms; margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #555B4C">Update local styles, not just layers — every instance stays consistent.</p>
+</div>
+<div class="card card-l rv" style="--d: 200ms; grid-column: 3; grid-row: 3; box-sizing: border-box; padding: 24px; background: #FFFFFF; border: 1px solid #E1E3D9; border-radius: 28px; display: flex; flex-direction: column">
+<div class="rv-t" style="--d: 400ms; display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; font-weight: 500">
+{presets.map((preset) => (
+  <span style={preset.style}>{preset.label}</span>
+))}
+</div>
+<h3 class="rv-t" style="--d: 500ms; margin: auto 0 0; font-size: 22px; line-height: 1.2; letter-spacing: -0.025em; font-weight: 650">Presets &amp; custom rules</h3>
+<p class="rv-t" style="--d: 560ms; margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #555B4C">Start from a preset or save your brand's rules and share them with the team.</p>
+</div>
+<div class="card rv" style="--d: 300ms; grid-column: 4; grid-row: 3; box-sizing: border-box; padding: 24px; background: #C8F53C; color: #0A0B09; border-radius: 28px; display: flex; flex-direction: column">
+<div class="rv-t" style="--d: 500ms; display: flex; gap: 10px; padding-top: 6px" aria-hidden="true">
+<span class="key" style="width: 72px; height: 72px; border-radius: 16px; background: #0A0B09; color: #C8F53C; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 500">⌘</span>
+<span class="key" style="width: 72px; height: 72px; border-radius: 16px; background: #0A0B09; color: #C8F53C; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 600; animation-delay: .08s">Z</span>
+</div>
+<h3 class="rv-t" style="--d: 600ms; margin: auto 0 0; font-size: 22px; line-height: 1.2; letter-spacing: -0.025em; font-weight: 650">Live preview &amp; undo</h3>
+<p class="rv-t" style="--d: 660ms; margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #2A3310">See every change before it lands. One ⌘Z brings it all back.</p>
+</div>
+</div>
+</section>
+
+<section id="how" style="height: 1250px; box-sizing: border-box; padding: 140px max(120px, calc((100% - 1200px) / 2)) 0">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center">
+<div class="rv-t" style="display: inline-flex; align-items: center; gap: 10px; padding: 5px 14px 5px 5px; border: 1px solid #2A2E24; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #A2A898"><span style="padding: 3px 9px; border-radius: 999px; background: #C8F53C; color: #0A0B09; font-weight: 500">05</span>HOW IT WORKS</div>
+<h2 class="rv-t" style="--d: 80ms; margin: 28px 0 0; font-size: 56px; line-height: 1.06; letter-spacing: -0.04em; font-weight: 650">From cramped to <span style="color: #C8F53C">crafted</span><br />in three steps.</h2>
+<p class="rv-t" style="--d: 180ms; margin: 24px 0 0; max-width: 600px; font-size: 18px; line-height: 1.6; color: #A2A898">No settings to memorize and no maths to do. A typographer's judgement, right inside your Figma workflow.</p>
+</div>
+
+<div class="rv-s" style="--d: 120ms; position: relative; margin-top: 56px; height: 660px; border-radius: 28px; border: 1px solid #1E211B; overflow: hidden">
+<div class="drift" style="position: absolute; inset: 0; background-color: #0F110D; background-image: radial-gradient(circle, #2C3126 1px, transparent 1.4px); background-size: 20px 20px"></div>
+
+<div style="position: absolute; left: 400px; top: 46px; width: 400px; height: 568px; box-sizing: border-box; background: #121410; border: 1px solid #2A2E24; border-radius: 18px; box-shadow: 0 40px 90px rgba(0,0,0,0.6); overflow: hidden">
+<div style="height: 56px; box-sizing: border-box; padding: 0 8px 0 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #22261E">
+<span style="display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700"><span style="width: 24px; height: 24px; border-radius: 7px; background: #C8F53C; color: #0A0B09; display: flex; align-items: center; justify-content: center; font-weight: 700; letter-spacing: -0.04em; font-size: 10px">Aa</span>TypeHarmony</span>
+<button type="button" aria-label="Close plugin" style="width: 44px; height: 44px; border: 0; background: transparent; color: #A2A898; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6L6 18"></path></svg></button>
+</div>
+<div style="padding: 20px">
+<div style="height: 60px; box-sizing: border-box; padding: 10px 14px; border-radius: 10px; background: #0A0B09; border: 1px solid #1E211B">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #80877A">SELECTION</div>
+<div style="margin-top: 4px; font-size: 14px">24 text layers · 3 fonts · 6 styles</div>
+</div>
+<div style="margin-top: 18px; height: 122px">
+<div style="height: 18px; font-size: 13px; line-height: 18px; color: #A2A898">Preset</div>
+<div style="margin-top: 8px; height: 96px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, 44px); gap: 8px">
+<button type="button" aria-pressed="true" style="border-radius: 10px; border: 1px solid #C8F53C; background: rgba(200,245,60,0.16); color: #C8F53C; font-family: 'Geist', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Readable</button>
+<button type="button" aria-pressed="false" style="border-radius: 10px; border: 1px solid #2A2E24; background: transparent; color: #C9CEBF; font-family: 'Geist', sans-serif; font-size: 14px; cursor: pointer">Editorial</button>
+<button type="button" aria-pressed="false" style="border-radius: 10px; border: 1px solid #2A2E24; background: transparent; color: #C9CEBF; font-family: 'Geist', sans-serif; font-size: 14px; cursor: pointer">Compact</button>
+<button type="button" aria-pressed="false" style="border-radius: 10px; border: 1px solid #2A2E24; background: transparent; color: #C9CEBF; font-family: 'Geist', sans-serif; font-size: 14px; cursor: pointer">Interface</button>
+</div>
+</div>
+<div style="margin-top: 18px; height: 56px">
+<div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px"><label for="th-ls">Letter-spacing</label><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #C8F53C">−1.5%</span></div>
+<input id="th-ls" type="range" min="-10" max="10" step="0.5" value="-1.5" style="width: 100%; margin: 12px 0 0; accent-color: #C8F53C" />
+</div>
+<div style="margin-top: 14px; height: 56px">
+<div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px"><label for="th-lh">Line height</label><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #C8F53C">150%</span></div>
+<input id="th-lh" type="range" min="100" max="200" step="5" value="150" style="width: 100%; margin: 12px 0 0; accent-color: #C8F53C" />
+</div>
+<div style="margin-top: 18px; height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #22261E"><span style="display: flex; align-items: center; gap: 8px; font-size: 14px">Snap to baseline grid<span style="padding: 2px 6px; border-radius: 4px; background: #1E211B; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #A2A898">4 pt</span></span><button type="button" aria-pressed="true" aria-label="Snap to baseline grid" style="position: relative; width: 40px; height: 24px; padding: 0; border: 0; border-radius: 999px; background: #C8F53C; cursor: pointer"><span style="position: absolute; top: 3px; right: 3px; width: 18px; height: 18px; border-radius: 50%; background: #0A0B09"></span></button></div>
+<button type="button" class="btn" style="position: relative; overflow: hidden; margin-top: 18px; width: 100%; height: 48px; border: 0; border-radius: 12px; background: #C8F53C; color: #0A0B09; font-family: 'Geist', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer"><span class="sheen"></span>Harmonize selection</button>
+</div>
+</div>
+
+<span class="rv-line" style="--d: 500ms; position: absolute; left: 344px; top: 152px; width: 52px; height: 1px; transform-origin: right center; background-image: repeating-linear-gradient(90deg, #C8F53C 0 6px, transparent 6px 10px)"></span>
+<span class="dot-pulse" style="position: absolute; left: 395px; top: 147px; width: 10px; height: 10px; border-radius: 50%; background: #C8F53C"></span>
+<div class="rv-l" style="--d: 300ms; position: absolute; left: 40px; top: 134px; width: 300px; display: flex; flex-direction: row-reverse; gap: 14px; text-align: right">
+<span style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #C8F53C; color: #0A0B09; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500">1</span>
+<div><h3 style="margin: 0; font-size: 20px; line-height: 36px; letter-spacing: -0.02em; font-weight: 650">Select your text</h3><p style="margin: 2px 0 0; font-size: 15px; line-height: 1.5; color: #A2A898">A layer, a frame, a page — or nothing at all for the whole file.</p></div>
+</div>
+<span class="rv-line" style="--d: 700ms; position: absolute; left: 804px; top: 261px; width: 52px; height: 1px; transform-origin: left center; background-image: repeating-linear-gradient(90deg, #C8F53C 0 6px, transparent 6px 10px)"></span>
+<span class="dot-pulse" style="position: absolute; left: 795px; top: 256px; width: 10px; height: 10px; border-radius: 50%; background: #C8F53C; animation-delay: .6s"></span>
+<div class="rv-r" style="--d: 500ms; position: absolute; left: 860px; top: 243px; width: 300px; display: flex; gap: 14px">
+<span style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #C8F53C; color: #0A0B09; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500">2</span>
+<div><h3 style="margin: 0; font-size: 20px; line-height: 36px; letter-spacing: -0.02em; font-weight: 650">Choose a preset</h3><p style="margin: 2px 0 0; font-size: 15px; line-height: 1.5; color: #A2A898">Readable, Editorial, Compact or Interface. Tweak it if you like.</p></div>
+</div>
+<span class="rv-line" style="--d: 900ms; position: absolute; left: 804px; top: 403px; width: 52px; height: 1px; transform-origin: left center; background-image: repeating-linear-gradient(90deg, #5E6456 0 6px, transparent 6px 10px)"></span>
+<div class="rv-r" style="--d: 700ms; position: absolute; left: 860px; top: 385px; height: 36px; box-sizing: border-box; padding: 0 14px; display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; border: 1px solid #2A2E24; background: #121410; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #C9CEBF"><span class="dot-pulse" style="width: 7px; height: 7px; border-radius: 50%; background: #C8F53C"></span>Live preview on canvas</div>
+<span class="rv-line" style="--d: 900ms; position: absolute; left: 344px; top: 570px; width: 52px; height: 1px; transform-origin: right center; background-image: repeating-linear-gradient(90deg, #C8F53C 0 6px, transparent 6px 10px)"></span>
+<span class="dot-pulse" style="position: absolute; left: 395px; top: 565px; width: 10px; height: 10px; border-radius: 50%; background: #C8F53C; animation-delay: 1.2s"></span>
+<div class="rv-l" style="--d: 700ms; position: absolute; left: 40px; top: 552px; width: 300px; display: flex; flex-direction: row-reverse; gap: 14px; text-align: right">
+<span style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: #C8F53C; color: #0A0B09; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500">3</span>
+<div><h3 style="margin: 0; font-size: 20px; line-height: 36px; letter-spacing: -0.02em; font-weight: 650">Harmonize &amp; ship</h3><p style="margin: 2px 0 0; font-size: 15px; line-height: 1.5; color: #A2A898">One click applies it all — checked and ready for hand-off.</p></div>
+</div>
+</div>
+</section>
+
+<section id="faq" style="height: 880px; box-sizing: border-box; padding: 140px max(120px, calc((100% - 1200px) / 2)) 0; background: #F3F4EE; color: #0E0F0C; display: grid; grid-template-columns: 400px minmax(0, 1fr); gap: 96px; align-items: start">
+<div>
+<div class="rv-t" style="display: inline-flex; align-items: center; gap: 10px; padding: 5px 14px 5px 5px; border: 1px solid #D3D6CA; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #3F4535"><span style="padding: 3px 9px; border-radius: 999px; background: #0A0B09; color: #C8F53C; font-weight: 500">06</span>QUESTIONS</div>
+<h2 class="rv-t" style="--d: 80ms; margin: 28px 0 0; font-size: 56px; line-height: 1.06; letter-spacing: -0.04em; font-weight: 650">Questions,<br /><span class="mark" style="padding: 0 8px; background-image: linear-gradient(transparent 56%, #C8F53C 56%, #C8F53C 92%, transparent 92%)">answered.</span></h2>
+<p class="rv-t" style="--d: 160ms; margin: 24px 0 0; font-size: 17px; line-height: 1.6; color: #555B4C">Everything you need to know before your first harmonize. Still curious? The team is happy to help.</p>
+<a href="#install" class="rv-t btn" style="--d: 240ms; margin-top: 32px; display: inline-flex; align-items: center; gap: 10px; height: 52px; padding: 0 24px; box-sizing: border-box; border-radius: 999px; background: #0A0B09; color: #F1F3EA; font-size: 15px; font-weight: 600; text-decoration: none">Contact the team<svg class="arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+</div>
+<div style="border-bottom: 1px solid #D3D6CA">
+{faqs.map((faq, index) => (
+  <div class="rv-t faq-item" style={`--d: ${faq.delay}ms; border-top: 1px solid #D3D6CA`}>
+    <button type="button" class="faq" aria-expanded="false" aria-controls={`faq-a${index}`} style="width: 100%; min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0; background: transparent; border: 0; cursor: pointer; text-align: left; font-family: 'Geist', sans-serif; color: #0E0F0C">
+      <span class="faq-q" style="font-size: 20px; font-weight: 600; letter-spacing: -0.015em">{faq.question}</span>
+      <span class="acc-ico" style="width: 36px; height: 36px; flex-shrink: 0; box-sizing: border-box; border-radius: 50%; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></span>
+    </button>
+    <div class="acc-body" id={`faq-a${index}`} style="display: grid; grid-template-rows: 0fr">
+      <div style="overflow: hidden; min-height: 0"><p style="margin: 0; padding: 0 72px 26px 0; font-size: 16px; line-height: 1.65; color: #555B4C">{faq.answer}</p></div>
+    </div>
+  </div>
+))}
+</div>
+</section>
+
+<section id="install" style="position: relative; height: 1040px; box-sizing: border-box; padding: 140px max(120px, calc((100% - 1200px) / 2)) 0; overflow: hidden; background-image: repeating-linear-gradient(to bottom, transparent 0 39px, rgba(255,255,255,0.025) 39px 40px)">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center">
+<div class="rv-t" style="display: inline-flex; align-items: center; gap: 10px; padding: 7px 16px; border: 1px solid #2A2E24; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #A2A898"><span class="dot-pulse" style="width: 8px; height: 8px; border-radius: 50%; background: #C8F53C"></span>READY WHEN YOU ARE</div>
+<h2 class="rv-t" style="--d: 100ms; margin: 32px 0 0; font-size: 112px; line-height: 0.95; letter-spacing: -0.05em; font-weight: 700">Give your type<br />room to <span class="breathe-cta" style="color: #C8F53C">breathe.</span></h2>
+<p class="rv-t" style="--d: 220ms; margin: 32px 0 0; max-width: 560px; font-size: 20px; line-height: 1.6; color: #A2A898">Install TypeHarmony and give every headline, paragraph and label the space it deserves.</p>
+<div class="rv-t" style="--d: 320ms; margin-top: 40px; display: flex; gap: 12px">
+<a href="#top" class="btn" style="display: inline-flex; align-items: center; gap: 10px; height: 60px; padding: 0 32px; box-sizing: border-box; border-radius: 999px; background: #C8F53C; color: #0A0B09; font-weight: 600; font-size: 18px; text-decoration: none">Install in Figma<svg class="arr" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+<a href="#play" class="btn btn-ghost" style="display: inline-flex; align-items: center; height: 60px; padding: 0 32px; box-sizing: border-box; border-radius: 999px; border: 1px solid #3A3F33; color: #F1F3EA; font-weight: 500; font-size: 18px; text-decoration: none">Play the game first</a>
+</div>
+</div>
+
+<footer class="rv-t" style="margin-top: 120px; height: 96px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #1E211B">
+<div style="display: flex; align-items: center; gap: 16px">
+<span style="width: 32px; height: 32px; border-radius: 9px; background: #C8F53C; display: flex; align-items: center; justify-content: center; color: #0A0B09; font-weight: 700; letter-spacing: -0.04em; font-size: 13px">Aa</span>
+<span style="font-size: 18px; font-weight: 700; letter-spacing: -0.03em">TypeHarmony</span>
+<span style="font-size: 14px; color: #80877A">Letter-spacing and line-height, perfected for Figma.</span>
+</div>
+<nav aria-label="Footer" style="display: flex; gap: 32px; align-items: center; font-size: 14px">
+{footerLinks.map((link) => (
+  <a href={link.href} class="nl" style="color: #A2A898; text-decoration: none">{link.label}</a>
+))}
+<span style="color: #80877A">© 2026 TypeHarmony</span>
+</nav>
+</footer>
+<div class="wordmark" aria-hidden="true" style="margin-top: 24px; font-size: 190px; line-height: 0.8; font-weight: 800; letter-spacing: -0.06em; color: #131510; text-align: center; white-space: nowrap">TypeHarmony</div>
+</section>
+
+</div>
+
+<style is:global>
+html{scroll-behavior:smooth}
+body{margin:0;background:#0A0B09}
+h1,h2,h3{font-family:'Geist',sans-serif}
+a{color:#C8F53C}a:hover{color:#E3FF8F}
+.nav-pill{-webkit-backdrop-filter:blur(16px) saturate(140%);backdrop-filter:blur(16px) saturate(140%)}
+.outline-num{color:transparent;-webkit-text-stroke:1.5px #0E0F0C}
+
+.ld{animation:thUp .9s cubic-bezier(.2,.7,.2,1) both}
+.ld-down{animation:thDown .8s cubic-bezier(.2,.7,.2,1) both}
+.mask{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
+.mask-in{display:block;animation:thMask 1.15s cubic-bezier(.19,1,.22,1) both}
+.breathes{display:inline-block;animation:thTrackIn 1.9s cubic-bezier(.19,1,.22,1) .35s both,thBreathe 7s ease-in-out 2.8s infinite}
+.ld-card{animation:thCard 1.3s cubic-bezier(.19,1,.22,1) .5s both}
+.dot-pulse{animation:thDot 2.4s ease-out infinite}
+.cursor{animation:thCursor 9s ease-in-out 2s infinite}
+
+.hc-h{animation:thHcTrack 8s cubic-bezier(.65,0,.35,1) 1.8s infinite backwards}
+.hc-p{background-image:linear-gradient(to bottom,transparent calc(100% - 1px),var(--a35) calc(100% - 1px));background-size:100% 28px;animation:thHcLead 8s cubic-bezier(.65,0,.35,1) 1.8s infinite backwards}
+.sw{display:inline-grid;justify-items:end;align-items:center}
+.sw>span{grid-area:1/1}
+.sw-a{opacity:0;animation:thSwA 8s ease 1.8s infinite backwards}
+.sw-b{animation:thSwB 8s ease 1.8s infinite backwards}
+.hc-btn{animation:thBtn 8s ease 1.8s infinite backwards}
+
+.ticker{-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.ticker-track{animation:thMarquee 50s linear infinite}
+
+.lead-loop{animation:thLead 7s cubic-bezier(.65,0,.35,1) infinite}
+.track-loop{animation:thTrackFix 7s cubic-bezier(.65,0,.35,1) infinite}
+.scan{animation:thScan 5s steps(37,end) infinite}
+.band{animation:thBand 3.6s ease-in-out infinite}
+.pulse{transform-box:fill-box;transform-origin:center;animation:thPulse 2.4s ease-out infinite}
+.sheen{position:absolute;top:0;bottom:0;left:-50%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);animation:thSheen 3.8s ease-in-out infinite;pointer-events:none}
+.drift{animation:thDrift 14s linear infinite}
+.spin{animation:thSpin 6s linear infinite;transform-origin:center}
+.key{animation:thPress 3.2s ease-in-out infinite}
+.breathe-cta{display:inline-block;animation:thBreatheCta 6s ease-in-out infinite}
+
+.btn{transition:translate .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,background-color .3s,border-color .3s,color .3s}
+.btn:hover{translate:0 -2px;box-shadow:0 14px 34px -14px var(--a35)}
+.btn .arr{transition:translate .3s cubic-bezier(.2,.7,.2,1)}
+.btn:hover .arr{translate:4px 0}
+.btn-ghost:hover{border-color:var(--accent) !important}
+.nl{background-image:linear-gradient(var(--accent),var(--accent));background-repeat:no-repeat;background-position:0 100%;background-size:0% 1px;padding-bottom:4px;transition:background-size .35s cubic-bezier(.2,.7,.2,1),color .25s}
+.nl:hover{background-size:100% 1px;color:#F1F3EA !important}
+.card:hover{translate:0 -6px}
+.card-l:hover{border-color:#BFC4B3 !important;box-shadow:0 28px 56px -32px rgba(14,15,12,.4) !important}
+.faq .faq-q{transition:color .25s}
+.faq:hover .faq-q{color:#4A6400}
+.acc-ico{transition:transform .4s cubic-bezier(.2,.7,.2,1),background-color .3s,border-color .3s}
+.acc-body{transition:grid-template-rows .5s cubic-bezier(.2,.7,.2,1)}
+.wordmark{transition:color .8s ease}
+.wordmark:hover{color:#1D2016}
+.gtxt{transition:letter-spacing .15s ease,line-height .15s ease,background-size .15s ease}
+.gtxt-auto{transition-duration:1.1s;transition-timing-function:cubic-bezier(.65,0,.35,1)}
+.gfill{transition:width .35s cubic-bezier(.2,.7,.2,1)}
+.win{animation:thWin .5s cubic-bezier(.34,1.56,.64,1) both}
+button:disabled{cursor:not-allowed}
+.cmp-range{-webkit-appearance:none;appearance:none}
+
+.rv,.rv-t,.rv-s,.rv-l,.rv-r{transition:opacity 1s cubic-bezier(.2,.7,.2,1) var(--d,0ms),transform 1s cubic-bezier(.2,.7,.2,1) var(--d,0ms),translate .45s cubic-bezier(.2,.7,.2,1),border-color .45s,box-shadow .45s}
+.rv-on .rv:not(.in){opacity:0;transform:translateY(40px)}
+.rv-on .rv-t:not(.in){opacity:0;transform:translateY(20px)}
+.rv-on .rv-s:not(.in){opacity:0;transform:translateY(48px) scale(.965)}
+.rv-on .rv-l:not(.in){opacity:0;transform:translateX(-56px)}
+.rv-on .rv-r:not(.in){opacity:0;transform:translateX(56px)}
+.rv-line{transition:transform .9s cubic-bezier(.65,0,.35,1) var(--d,0ms)}
+.rv-on .rv-line:not(.in){transform:scaleX(0)}
+.mark{background-repeat:no-repeat;background-size:100% 100%;transition:background-size 1.1s cubic-bezier(.65,0,.35,1) .5s}
+.rv-on .rv-t:not(.in) .mark{background-size:0% 100%}
+.rv-chart .draw{transition:stroke-dashoffset 1.8s cubic-bezier(.65,0,.35,1) .3s}
+.rv-on .rv-chart:not(.in) .draw{stroke-dashoffset:1}
+.pop{transform-box:fill-box;transform-origin:center;transition:transform .55s cubic-bezier(.34,1.56,.64,1) var(--d,0ms)}
+.rv-on .rv-chart:not(.in) .pop{transform:scale(0)}
+.lbl{transition:opacity .6s ease 1.9s}
+.rv-on .rv-chart:not(.in) .lbl{opacity:0}
+
+@keyframes thUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes thDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes thMask{from{transform:translateY(105%)}to{transform:none}}
+@keyframes thTrackIn{from{letter-spacing:.14em;opacity:0}to{letter-spacing:-.05em;opacity:1}}
+@keyframes thBreathe{0%,100%{letter-spacing:-.05em}50%{letter-spacing:-.02em}}
+@keyframes thCard{from{opacity:0;transform:translateY(48px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes thDot{0%{box-shadow:0 0 0 0 var(--a35)}70%,100%{box-shadow:0 0 0 9px transparent}}
+@keyframes thCursor{0%,100%{transform:translate(0,0)}30%{transform:translate(-60px,-34px)}55%{transform:translate(-20px,-80px)}80%{transform:translate(30px,-20px)}}
+@keyframes thHcTrack{0%,20%{letter-spacing:0}38%,84%{letter-spacing:-.025em}100%{letter-spacing:0}}
+@keyframes thHcLead{0%,20%{line-height:18px;background-size:100% 18px}38%,84%{line-height:28px;background-size:100% 28px}100%{line-height:18px;background-size:100% 18px}}
+@keyframes thSwA{0%,22%{opacity:1}32%,84%{opacity:0}94%,100%{opacity:1}}
+@keyframes thSwB{0%,22%{opacity:0}32%,84%{opacity:1}94%,100%{opacity:0}}
+@keyframes thBtn{0%,22%{background-color:transparent;color:var(--accent)}32%,84%{background-color:var(--accent);color:#0A0B09}94%,100%{background-color:transparent;color:var(--accent)}}
+@keyframes thMarquee{to{transform:translateX(-50%)}}
+@keyframes thLead{0%,18%{line-height:14px}38%,82%{line-height:21px}100%{line-height:14px}}
+@keyframes thTrackFix{0%,18%{letter-spacing:.06em}38%,82%{letter-spacing:-.02em}100%{letter-spacing:.06em}}
+@keyframes thScan{from{transform:translateY(0)}to{transform:translateY(296px)}}
+@keyframes thBand{0%,100%{background-color:transparent}25%,45%{background-color:var(--a16)}}
+@keyframes thPulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(3.4);opacity:0}}
+@keyframes thSheen{0%{left:-50%}45%,100%{left:130%}}
+@keyframes thDrift{to{background-position:40px 40px}}
+@keyframes thSpin{to{transform:rotate(360deg)}}
+@keyframes thPress{0%,62%,100%{transform:none;box-shadow:0 6px 0 #000}70%,80%{transform:translateY(5px);box-shadow:0 1px 0 #000}}
+@keyframes thBreatheCta{0%,100%{letter-spacing:-.05em}50%{letter-spacing:.04em}}
+@keyframes thWin{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}html{scroll-behavior:auto}}
+</style>
+
+<script>
+const ACCENT = '#C8F53C';
+
+const root = document.getElementById('top');
+
+if (root) {
+  root.classList.add('rv-on');
+
+  const revealTargets = root.querySelectorAll(
+    '.rv, .rv-t, .rv-s, .rv-l, .rv-r, .rv-line, .rv-chart'
+  );
+
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add('in');
+          revealObserver.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+    );
+
+    revealTargets.forEach((target) => revealObserver.observe(target));
+  } else {
+    revealTargets.forEach((target) => target.classList.add('in'));
+  }
+}
+
+const compareRange = document.getElementById('cmp-range') as HTMLInputElement | null;
+const compareAfter = document.getElementById('cmp-after');
+const compareHandle = document.getElementById('cmp-handle');
+
+if (compareRange && compareAfter && compareHandle) {
+  const setSplit = (value: number) => {
+    compareAfter.style.clipPath = `inset(0 0 0 ${value}%)`;
+    compareHandle.style.left = `${value}%`;
+  };
+
+  compareRange.addEventListener('input', () => setSplit(Number(compareRange.value)));
+}
+
+const faqItems = Array.from(document.querySelectorAll('.faq-item'));
+let openFaq = 0;
+
+const setFaq = (openIndex: number) => {
+  faqItems.forEach((item, index) => {
+    const isOpen = index === openIndex;
+    const icon = item.querySelector<HTMLElement>('.acc-ico');
+    const body = item.querySelector<HTMLElement>('.acc-body');
+
+    item.querySelector('button')?.setAttribute('aria-expanded', String(isOpen));
+
+    if (body) body.style.gridTemplateRows = isOpen ? '1fr' : '0fr';
+
+    if (icon) {
+      icon.style.background = isOpen ? ACCENT : 'transparent';
+      icon.style.border = `1px solid ${isOpen ? ACCENT : '#C9CCBF'}`;
+      icon.style.color = isOpen ? '#0A0B09' : '#0E0F0C';
+      icon.style.transform = isOpen ? 'rotate(45deg)' : 'none';
+    }
+  });
+
+  openFaq = openIndex;
+};
+
+faqItems.forEach((item, index) => {
+  item.querySelector('button')?.addEventListener('click', () => {
+    setFaq(openFaq === index ? -1 : index);
+  });
+});
+
+setFaq(0);
+
+type Round = {
+  kicker: string;
+  text: string;
+  size: number;
+  weight: number;
+  transform: string;
+  width: number;
+  startSpacing: number;
+  startLeading: number;
+  targetSpacing: number;
+  targetLeading: number;
+  spacingWeight: number;
+  leadingWeight: number;
+  hint: string;
+};
+
+const ROUNDS: Round[] = [
+  {
+    kicker: 'Round 1 · Display headline · 56 px',
+    text: 'Every letter finds its place',
+    size: 56,
+    weight: 650,
+    transform: 'none',
+    width: 640,
+    startSpacing: 8,
+    startLeading: 150,
+    targetSpacing: -2.5,
+    targetLeading: 110,
+    spacingWeight: 6,
+    leadingWeight: 0.9,
+    hint: 'big type wants tighter tracking and a compact line-height.'
+  },
+  {
+    kicker: 'Round 2 · Body copy · 17 px',
+    text: 'Good spacing is felt rather than seen. When letters and lines sit at the right distance, the eye glides from word to word and returns to the next line without effort, so the reader can simply enjoy the story.',
+    size: 17,
+    weight: 400,
+    transform: 'none',
+    width: 560,
+    startSpacing: -5,
+    startLeading: 100,
+    targetSpacing: 0,
+    targetLeading: 160,
+    spacingWeight: 6,
+    leadingWeight: 0.9,
+    hint: 'long reading needs neutral tracking and generous leading.'
+  },
+  {
+    kicker: 'Round 3 · Label · 18 px caps',
+    text: 'New release\nSpacing · Rhythm · Harmony',
+    size: 18,
+    weight: 600,
+    transform: 'uppercase',
+    width: 640,
+    startSpacing: -4,
+    startLeading: 100,
+    targetSpacing: 12,
+    targetLeading: 150,
+    spacingWeight: 6,
+    leadingWeight: 0.6,
+    hint: 'small capitals need extra air between the letters.'
+  }
+];
+
+const byId = (id: string) => document.getElementById(id) as HTMLElement;
+
+const gameText = byId('g-text') as HTMLDivElement;
+const spacingInput = byId('g-ls') as HTMLInputElement;
+const leadingInput = byId('g-lh') as HTMLInputElement;
+const nextButton = byId('g-next') as HTMLButtonElement;
+const scoreEl = byId('g-score') as HTMLSpanElement;
+const fillEl = byId('g-fill') as HTMLDivElement;
+const winEl = byId('g-win') as HTMLSpanElement;
+const kickerEl = byId('g-kicker') as HTMLSpanElement;
+const hintEl = byId('g-hint') as HTMLSpanElement;
+const spacingLabel = byId('g-lsl') as HTMLSpanElement;
+const leadingLabel = byId('g-lhl') as HTMLSpanElement;
+const statusEl = byId('g-status') as HTMLDivElement;
+const dots = Array.from(document.querySelectorAll<HTMLElement>('.g-dot'));
+
+let round = 0;
+let spacing = 0;
+let leading = 0;
+
+const scoreStatus = (score: number) => {
+  if (score >= 92) return 'Beautiful. That is exactly how a typographer would set it.';
+  if (score >= 70) return 'Getting close — fine-tune a little more.';
+  if (score >= 40) return 'Better, but it still feels off.';
+  return 'Something feels wrong. Keep dragging.';
+};
+
+const render = (animated: boolean) => {
+  const current = ROUNDS[round];
+
+  gameText.className = animated ? 'gtxt gtxt-auto' : 'gtxt';
+  gameText.style.fontSize = `${current.size}px`;
+  gameText.style.fontWeight = String(current.weight);
+  gameText.style.textTransform = current.transform;
+  gameText.style.maxWidth = `${current.width}px`;
+  gameText.style.letterSpacing = `${spacing / 100}em`;
+  gameText.style.lineHeight = `${leading}%`;
+  gameText.style.backgroundSize = `100% ${(current.size * leading) / 100}px`;
+  gameText.textContent = current.text;
+
+  kickerEl.textContent = current.kicker;
+  hintEl.textContent = current.hint;
+
+  spacingInput.value = String(spacing);
+  leadingInput.value = String(leading);
+
+  spacingLabel.textContent = `${spacing > 0 ? '+' : spacing < 0 ? '−' : ''}${Math.abs(spacing).toFixed(1)}%`;
+  leadingLabel.textContent = `${leading}%`;
+
+  const distance =
+    Math.abs(spacing - current.targetSpacing) * current.spacingWeight +
+    Math.abs(leading - current.targetLeading) * current.leadingWeight;
+  const score = Math.max(0, Math.min(100, Math.round(100 - distance)));
+  const solved = score >= 92;
+
+  scoreEl.textContent = String(score);
+  scoreEl.style.color = solved ? ACCENT : '#F1F3EA';
+  fillEl.style.width = `${score}%`;
+  statusEl.textContent = scoreStatus(score);
+  winEl.hidden = !solved;
+  nextButton.disabled = !solved;
+  nextButton.textContent = round === ROUNDS.length - 1 ? 'Play again' : 'Next round';
+  nextButton.style.border = solved ? '0' : '1px solid #22261E';
+  nextButton.style.background = solved ? '#F1F3EA' : 'transparent';
+  nextButton.style.color = solved ? '#0A0B09' : '#5E6456';
+  nextButton.style.cursor = solved ? 'pointer' : 'not-allowed';
+
+  dots.forEach((dot, index) => {
+    dot.style.background = index <= round ? '#0E0F0C' : '#D0D3C6';
+  });
+};
+
+const startRound = (index: number) => {
+  round = index;
+  spacing = ROUNDS[index].startSpacing;
+  leading = ROUNDS[index].startLeading;
+  render(false);
+};
+
+spacingInput.addEventListener('input', () => {
+  spacing = Number.parseFloat(spacingInput.value);
+  render(false);
+});
+
+leadingInput.addEventListener('input', () => {
+  leading = Number.parseFloat(leadingInput.value);
+  render(false);
+});
+
+byId('g-auto').addEventListener('click', () => {
+  spacing = ROUNDS[round].targetSpacing;
+  leading = ROUNDS[round].targetLeading;
+  render(true);
+});
+
+byId('g-reset').addEventListener('click', () => startRound(round));
+
+nextButton.addEventListener('click', () => {
+  if (nextButton.disabled) return;
+  startRound((round + 1) % ROUNDS.length);
+});
+
+startRound(0);
+</script>
